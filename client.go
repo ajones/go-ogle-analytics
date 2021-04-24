@@ -7,15 +7,9 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"regexp"
 )
 
-var trackingIDMatcher = regexp.MustCompile(`^UA-\d+-\d+$`)
-
 func NewClient(trackingID string) (*Client, error) {
-	if !trackingIDMatcher.MatchString(trackingID) {
-		return nil, fmt.Errorf("Invalid Tracking ID: %s", trackingID)
-	}
 	return &Client{
 		UseTLS:             true,
 		HttpClient:         http.DefaultClient,
